@@ -1,0 +1,123 @@
+# General OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE and Editor files
+.idea/
+*.iml
+*.iws
+.vscode/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.whl
+*.egg-info/
+build/
+dist/
+venv/
+.env
+*.env
+
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+/.cargo/
+.cargo/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+out/
+*.log
+
+# C/C++
+*.o
+*.a
+*.so
+*.out
+*.exe
+*.obj
+*.dll
+*.pdb
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.sln
+
+# Go
+*.exe
+*.test
+*.out
+/vendor/
+
+# PHP
+/vendor/
+*.log
+.env
+
+# Ruby
+/.bundle/
+/log/
+/tmp/
+*.gem
+*.rbc
+
+# Swift
+*.xcuserstate
+*.xcworkspace
+*.xcodeproj
+*.swiftpm/
+.build/
+DerivedData/
+
+# Kotlin
+*.iml
+.idea/
+build/
+*.log
+
+# Gradle
+.gradle/
+build/
+
+# Android
+*.apk
+*.ap_
+*.dex
+*.class
+*.jar
+*.keystore
+/build/
+local.properties
+
+# Miscellaneous
+*.log
+*.bak
+*.tmp
+*.old
+*.orig
+*.rej
+*.patch
+*.csv
+
