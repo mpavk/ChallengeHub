@@ -12,6 +12,7 @@ Thumbs.db
 *.code-workspace
 *.sublime-project
 *.sublime-workspace
+cmake-build-*/
 
 # Node.js
 node_modules/
