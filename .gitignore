@@ -33,7 +33,7 @@ venv/
 *.env
 
 # Rust
-./target/
+target/
 **/*.rs.bk
 Cargo.lock
 /.cargo/
