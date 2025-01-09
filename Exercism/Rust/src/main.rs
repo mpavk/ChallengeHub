@@ -6,7 +6,7 @@ fn remove_whitespace(s: &str) -> String {
 /// Check a Luhn checksum.
 ///
 pub fn is_valid_luhn_algorithm(code: &str) -> bool {
-  let mut clear_code:String = remove_whitespace(code);
+  let clear_code:String = remove_whitespace(code);
 
   if clear_code.len() <= 1 {
     return false;
@@ -35,7 +35,7 @@ pub fn is_valid_luhn_algorithm(code: &str) -> bool {
 }
 
 pub fn is_armstrong_number(num: u32) -> bool {
-  let mut string_num = num.to_string();
+  let string_num = num.to_string();
   let mut sum = 0;
   for i in string_num.chars() {
     sum += i.to_digit(10).unwrap().pow(string_num.len() as u32);
