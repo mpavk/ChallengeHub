@@ -43,6 +43,20 @@ pub fn is_armstrong_number(num: u32) -> bool {
   sum == num
 }
 
+pub fn square_of_sum(n: u32) -> u32 {
+  let sum: u32 = (1..=n).sum();
+  sum * sum
+}
+
+
+pub fn sum_of_squares(n: u32) -> u32 {
+  (n*(n+1)*(2*n+1))/6
+}
+
+pub fn difference(n: u32) -> u32 {
+  square_of_sum(n) - sum_of_squares(n)
+}
+
 fn run_test_luhn_algorithm(){
   println!("{}", is_valid_luhn_algorithm("4539319503436467"));
   println!("{}", is_valid_luhn_algorithm("055 444 285"));
@@ -52,4 +66,7 @@ fn run_test_luhn_algorithm(){
 
 fn main() {
   // run_test_luhn_algorithm();
+  println!("{}", square_of_sum(100));
+  println!("{}", sum_of_squares(100));
+  println!("{}", difference(100));
 }
