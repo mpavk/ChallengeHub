@@ -70,6 +70,31 @@ pub fn is_leap_year(year: u64) -> bool {
 }
 
 
+//This algorithm uses less memory but takes time to execute
+pub fn nth(n: u32) -> u32 {
+  let mut count = 0;
+  let mut count_divider = 0;
+  let mut current_number = 2;
+  loop {
+    for j in 2..current_number+1 {
+      if current_number % 2 == 0 && current_number !=2 {
+        break;
+      }
+      if current_number % j == 0 {
+        count_divider += 1;
+      }
+    }
+    if count_divider == 1 {
+      count += 1
+    }
+    count_divider = 0;
+    if count != n {
+      current_number +=1;
+    } else {
+      return current_number;
+    }
+  }
+}
 
 fn run_test_luhn_algorithm(){
   println!("{}", is_valid_luhn_algorithm("4539319503436467"));
@@ -83,5 +108,7 @@ fn main() {
   // println!("{}", square_of_sum(100));
   // println!("{}", sum_of_squares(100));
   // println!("{}", difference(100));
-  println!("{}", is_leap_year(1600));
+  //println!("{}", is_leap_year(1600));
+  println!("{}", nth(10000));
+
 }
