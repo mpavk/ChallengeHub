@@ -66,7 +66,7 @@ pub fn total() -> u64 {
 }
 
 pub fn is_leap_year(year: u64) -> bool {
-  year % 4 == 0 || year % 400 == 0
+  (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
 }
 
 
@@ -83,5 +83,5 @@ fn main() {
   // println!("{}", square_of_sum(100));
   // println!("{}", sum_of_squares(100));
   // println!("{}", difference(100));
-  //println!("{}", is_leap_year(1800));
+  println!("{}", is_leap_year(1600));
 }
