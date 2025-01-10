@@ -57,6 +57,14 @@ pub fn difference(n: u32) -> u32 {
   square_of_sum(n) - sum_of_squares(n)
 }
 
+pub fn square(s: u32) -> u64 {
+  2_u64.pow(s-1)
+}
+
+pub fn total() -> u64 {
+  (1..=64).map(|s| square(s)).sum()
+}
+
 fn run_test_luhn_algorithm(){
   println!("{}", is_valid_luhn_algorithm("4539319503436467"));
   println!("{}", is_valid_luhn_algorithm("055 444 285"));
@@ -66,7 +74,8 @@ fn run_test_luhn_algorithm(){
 
 fn main() {
   // run_test_luhn_algorithm();
-  println!("{}", square_of_sum(100));
-  println!("{}", sum_of_squares(100));
-  println!("{}", difference(100));
+  // println!("{}", square_of_sum(100));
+  // println!("{}", sum_of_squares(100));
+  // println!("{}", difference(100));
+  println!("{}", total());
 }
