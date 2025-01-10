@@ -96,6 +96,24 @@ pub fn nth(n: u32) -> u32 {
   }
 }
 
+pub fn factors(n: u64) -> Vec<u64> {
+  let mut v:Vec<u64> = Vec::new();
+  let mut num = n;
+  loop {
+    for i in 2..num+1{
+      if num%i == 0 {
+        num = num/i;
+        v.push(i);
+        break
+      }
+    }
+    if num == 1 {
+      return v;
+    }
+  }
+}
+
+
 fn run_test_luhn_algorithm(){
   println!("{}", is_valid_luhn_algorithm("4539319503436467"));
   println!("{}", is_valid_luhn_algorithm("055 444 285"));
@@ -108,7 +126,8 @@ fn main() {
   // println!("{}", square_of_sum(100));
   // println!("{}", sum_of_squares(100));
   // println!("{}", difference(100));
-  //println!("{}", is_leap_year(1600));
-  println!("{}", nth(10000));
+  // println!("{}", is_leap_year(1600));
+  // println!("{}", nth(10000));
+  println!("{:?}",factors(60));
 
 }
