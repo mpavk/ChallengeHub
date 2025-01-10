@@ -1,3 +1,4 @@
+use std::collections::HashSet;
 
 fn remove_whitespace(s: &str) -> String {
   s.chars().filter(|c| !c.is_whitespace()).collect()
@@ -149,6 +150,24 @@ pub fn raindrops(n: u32) -> String {
   }
 }
 
+pub fn sum_of_multiples(limit: u32, factors: &[u32]) -> u32 {
+  let mut set = HashSet::new();
+  for num in factors {
+    if num  == &0 {
+      continue;
+    }
+    for i in 0..limit  {
+      if i % num == 0  {
+        set.insert(i);
+      }
+    }
+  }
+
+  set.iter().sum()
+}
+
+
+
 
 fn run_test_luhn_algorithm(){
   println!("{}", is_valid_luhn_algorithm("4539319503436467"));
@@ -165,6 +184,6 @@ fn main() {
   // println!("{}", difference(100));
   // println!("{}", is_leap_year(1600));
   // println!("{}", nth(10000));
-  println!("{:?}",factors(60));
-
+  // println!("{:?}",factors(60));
+  println!("{}", sum_of_multiples(4, &[3, 0]));
 }
