@@ -65,6 +65,9 @@ pub fn total() -> u64 {
   (1..=64).map(|s| square(s)).sum()
 }
 
+pub fn is_leap_year(year: u64) -> bool {
+  year % 4 == 0 || year % 400 == 0
+}
 
 
 
