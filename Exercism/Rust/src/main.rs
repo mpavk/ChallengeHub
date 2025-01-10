@@ -113,12 +113,30 @@ pub fn factors(n: u64) -> Vec<u64> {
   }
 }
 
+pub fn build_proverb(list: &[&str]) -> String {
+  if list.is_empty() {
+    return String::new(); // Return an empty string if the list is empty
+  }
+
+  let mut result = Vec::new();
+
+  for pair in list.windows(2) {
+    result.push(format!("For want of a {} the {} was lost.", pair[0], pair[1]));
+  }
+
+  result.push(format!("And all for the want of a {}.", list[0]));
+
+  result.join("\n")
+}
+
+
 
 fn run_test_luhn_algorithm(){
   println!("{}", is_valid_luhn_algorithm("4539319503436467"));
   println!("{}", is_valid_luhn_algorithm("055 444 285"));
   println!("{}", is_valid_luhn_algorithm("059"));
   println!("{}", is_valid_luhn_algorithm("091"));
+
 }
 
 fn main() {
