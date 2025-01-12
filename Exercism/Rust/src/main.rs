@@ -219,7 +219,26 @@ impl HighScores {
 }
 
 pub fn brackets_are_balanced(string: &str) -> bool {
-  todo!("Check if the string \"{string}\" contains balanced brackets");
+  let mut stack: Vec<char> = Vec::new();
+  for i in string.chars() {
+    if i == '{' || i == '[' || i == '(' {
+      stack.push(i);
+    } else if i == ')' || i == '}' || i == ']' {
+      if let Some(&last) = stack.last() {
+        if (i == ')' && last == '(') ||
+          (i == '}' && last == '{') ||
+          (i == ']' && last == '[')
+        {
+          stack.pop();
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+  }
+  stack.is_empty()
 }
 
 
@@ -240,4 +259,5 @@ fn main() {
   // println!("{}", nth(10000));
   // println!("{:?}",factors(60));
   //println!("{}", sum_of_multiples(4, &[3, 0]));
+  println!("{}", brackets_are_balanced("{}["));
 }
