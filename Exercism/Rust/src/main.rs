@@ -249,6 +249,24 @@ fn run_test_luhn_algorithm(){
   println!("{}", is_valid_luhn_algorithm("091"));
 
 }
+pub fn collatz(n: u64) -> Option<u64> {
+  let mut count = 0;
+  let mut exp = n;
+  if n == 0 {
+    return None;
+  }
+  loop {
+    if exp == 1 {
+      return Some(count)
+    }
+    if exp % 2 == 0 {
+      exp /= 2 ;
+    } else {
+      exp = exp*3 + 1;
+    }
+    count += 1;
+  }
+}
 
 fn main() {
   // run_test_luhn_algorithm();
@@ -259,5 +277,6 @@ fn main() {
   // println!("{}", nth(10000));
   // println!("{:?}",factors(60));
   //println!("{}", sum_of_multiples(4, &[3, 0]));
-  println!("{}", brackets_are_balanced("{}["));
+  // println!("{}", brackets_are_balanced("{}["));
+  println!("{}", collatz(1_000_000).unwrap());
 }
