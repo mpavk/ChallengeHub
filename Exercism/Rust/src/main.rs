@@ -167,7 +167,6 @@ pub fn sum_of_multiples(limit: u32, factors: &[u32]) -> u32 {
 }
 pub fn reply(message: &str) -> &str {
   let trimmed = message.trim();
-
   if trimmed.is_empty() {
     "Fine. Be that way!"
   } else if trimmed.ends_with('?') && trimmed.chars().any(|c| c.is_alphabetic()) && trimmed == trimmed.to_uppercase() {
@@ -180,9 +179,48 @@ pub fn reply(message: &str) -> &str {
     "Whatever."
   }
 }
+#[derive(Debug)]
+pub struct HighScores{
+  scores: Vec<u32>,
+}
 
+impl HighScores {
+  pub fn new(scores: &[u32]) -> Self {
+    HighScores {
+      scores: scores.to_vec(),
+    }
+  }
 
+  pub fn scores(&self) -> &[u32] {
+    &self.scores[0..]
+  }
 
+  pub fn latest(&self) -> Option<u32> {
+    self.scores.last().copied()
+  }
+
+  pub fn personal_best(&self) -> Option<u32> {
+    self.scores.iter().max().copied()
+  }
+
+  pub fn personal_top_three(&self) -> Vec<u32> {
+    let mut n = 0;
+    if self.scores.is_empty() {
+      return vec![]
+    } else if self.scores.len() <= 3 {
+      n = self.scores.len();
+    } else {
+      n = 3;
+    }
+    let mut v = self.scores.clone();
+    v.sort_unstable_by(|a, b| b.cmp(a));;
+    v[..n].to_vec()
+  }
+}
+
+pub fn brackets_are_balanced(string: &str) -> bool {
+  todo!("Check if the string \"{string}\" contains balanced brackets");
+}
 
 
 fn run_test_luhn_algorithm(){
@@ -201,5 +239,5 @@ fn main() {
   // println!("{}", is_leap_year(1600));
   // println!("{}", nth(10000));
   // println!("{:?}",factors(60));
-  println!("{}", sum_of_multiples(4, &[3, 0]));
+  //println!("{}", sum_of_multiples(4, &[3, 0]));
 }
