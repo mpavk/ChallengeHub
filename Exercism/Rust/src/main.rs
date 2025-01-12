@@ -268,6 +268,43 @@ pub fn collatz(n: u64) -> Option<u64> {
   }
 }
 
+pub fn private_key(p: u64) -> u64 {
+  use std::time::{SystemTime, UNIX_EPOCH};
+
+  let now = SystemTime::now()
+    .duration_since(UNIX_EPOCH)
+    .expect("System time is before the UNIX EPOCH")
+    .as_nanos();
+  let seed = (now % p as u128) as u64;
+  2 + seed % (p - 2)
+}
+
+
+pub fn public_key(p: u64, g: u64, a: u64) -> u64 {
+  mod_exp(g, a, p)
+}
+
+pub fn secret(p: u64, b_pub: u64, a: u64) -> u64 {
+  mod_exp(b_pub, a, p)
+}
+
+fn mod_exp(base: u64, exp: u64, modulus: u64) -> u64 {
+  let mut result = 1;
+  let mut base = base % modulus;
+  let mut exp = exp;
+
+  while exp > 0 {
+    if exp % 2 == 1 {
+      result = (result * base) % modulus;
+    }
+    base = (base * base) % modulus;
+    exp /= 2;
+  }
+
+  result
+}
+
+
 fn main() {
   // run_test_luhn_algorithm();
   // println!("{}", square_of_sum(100));
@@ -276,7 +313,7 @@ fn main() {
   // println!("{}", is_leap_year(1600));
   // println!("{}", nth(10000));
   // println!("{:?}",factors(60));
-  //println!("{}", sum_of_multiples(4, &[3, 0]));
+  // println!("{}", sum_of_multiples(4, &[3, 0]));
   // println!("{}", brackets_are_balanced("{}["));
   println!("{}", collatz(1_000_000).unwrap());
 }
