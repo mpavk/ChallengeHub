@@ -304,6 +304,20 @@ fn mod_exp(base: u64, exp: u64, modulus: u64) -> u64 {
   result
 }
 
+pub fn series(digits: &str, len: usize) -> Vec<String> {
+  if digits.len() < len || digits.is_empty() {
+   return  vec![];
+  }
+  let mut v = Vec::new();
+  for i in 0..digits.len() {
+    if i+len <= digits.len() {
+      let n = i + len;
+      v.push(digits[i..n].to_string());
+    }
+  }
+  v
+}
+
 
 fn main() {
   // run_test_luhn_algorithm();
@@ -315,5 +329,7 @@ fn main() {
   // println!("{:?}",factors(60));
   // println!("{}", sum_of_multiples(4, &[3, 0]));
   // println!("{}", brackets_are_balanced("{}["));
-  println!("{}", collatz(1_000_000).unwrap());
+  // println!("{}", collatz(1_000_000).unwrap());
+  println!("{:?}", series("777777", 3));
 }
+
