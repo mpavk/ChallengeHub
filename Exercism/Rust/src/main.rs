@@ -318,6 +318,19 @@ pub fn series(digits: &str, len: usize) -> Vec<String> {
   v
 }
 
+pub fn egg_count(display_value: u32) -> usize {
+  let mut count = 0;
+  let mut number = display_value;
+  while number > 0 {
+    count += number & 1;
+    number >>= 1;
+  }
+  count as usize
+}
+
+
+
+
 
 fn main() {
   // run_test_luhn_algorithm();
