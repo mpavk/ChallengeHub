@@ -335,20 +335,76 @@ pub fn abbreviate(phrase: &str) -> String {
   for ch in phrase.chars() {
     if let Some(prev) = prev_char {
       if ((!prev.is_alphabetic() && ch.is_alphabetic()) || (ch.is_uppercase() && !prev.is_uppercase())) && (prev != '\'' && prev !=',') {
-        s += &ch.to_string().to_uppercase();
+        s.push(ch.to_ascii_uppercase());
       }
     } else {
-      s += &ch.to_string().to_uppercase();
+      s.push(ch.to_ascii_uppercase());
     }
     prev_char = Some(ch);
   }
 
   s
 }
+pub struct Allergies {
+  score: u32,
+}
 
+#[derive(Debug, PartialEq, Eq)]
+pub enum Allergen {
+  Eggs,
+  Peanuts,
+  Shellfish,
+  Strawberries,
+  Tomatoes,
+  Chocolate,
+  Pollen,
+  Cats,
+}
 
+impl Allergen {
+  pub fn score(&self) -> u32 {
+    match self {
+      Allergen::Eggs => 1,
+      Allergen::Peanuts => 2,
+      Allergen::Shellfish=> 4,
+      Allergen::Strawberries => 8,
+      Allergen::Tomatoes => 16,
+      Allergen::Chocolate => 32,
+      Allergen::Pollen => 64,
+      Allergen::Cats => 128,
+    }
+  }
+}
 
+impl Allergies {
+  pub fn new(score: u32) -> Self {
+    Allergies {
+      score
+    }
+  }
 
+  pub fn is_allergic_to(&self, allergen: &Allergen) -> bool {
+    self.score & allergen.score() != 0
+  }
+
+  pub fn allergies(&self) -> Vec<Allergen> {
+    let allergens = vec![
+      Allergen::Eggs,
+      Allergen::Peanuts,
+      Allergen::Shellfish,
+      Allergen::Strawberries,
+      Allergen::Tomatoes,
+      Allergen::Chocolate,
+      Allergen::Pollen,
+      Allergen::Cats,
+    ];
+
+    allergens
+      .into_iter()
+      .filter(|allergen| self.is_allergic_to(allergen))
+      .collect()
+  }
+}
 
 fn main() {
   // run_test_luhn_algorithm();
