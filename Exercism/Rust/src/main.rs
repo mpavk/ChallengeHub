@@ -213,7 +213,7 @@ impl HighScores {
       n = 3;
     }
     let mut v = self.scores.clone();
-    v.sort_unstable_by(|a, b| b.cmp(a));;
+    v.sort_unstable_by(|a, b| b.cmp(a));
     v[..n].to_vec()
   }
 }
@@ -328,6 +328,24 @@ pub fn egg_count(display_value: u32) -> usize {
   count as usize
 }
 
+pub fn abbreviate(phrase: &str) -> String {
+  let mut s = String::new();
+  let mut prev_char: Option<char> = None;
+
+  for ch in phrase.chars() {
+    if let Some(prev) = prev_char {
+      if ((!prev.is_alphabetic() && ch.is_alphabetic()) || (ch.is_uppercase() && !prev.is_uppercase())) && (prev != '\'' && prev !=',') {
+        s += &ch.to_string().to_uppercase();
+      }
+    } else {
+      s += &ch.to_string().to_uppercase();
+    }
+    prev_char = Some(ch);
+  }
+
+  s
+}
+
 
 
 
@@ -343,6 +361,7 @@ fn main() {
   // println!("{}", sum_of_multiples(4, &[3, 0]));
   // println!("{}", brackets_are_balanced("{}["));
   // println!("{}", collatz(1_000_000).unwrap());
-  println!("{:?}", series("777777", 3));
+  // println!("{:?}", series("777777", 3));
+  println!("{}", abbreviate("Something - I made up from thin air"));
 }
 
