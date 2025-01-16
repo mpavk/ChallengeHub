@@ -204,14 +204,16 @@ impl HighScores {
   }
 
   pub fn personal_top_three(&self) -> Vec<u32> {
-    let mut n = 0;
     if self.scores.is_empty() {
-      return vec![]
-    } else if self.scores.len() <= 3 {
-      n = self.scores.len();
-    } else {
-      n = 3;
+      return vec![];
     }
+
+    let n = if self.scores.len() <= 3 {
+      self.scores.len()
+    } else {
+      3
+    };
+
     let mut v = self.scores.clone();
     v.sort_unstable_by(|a, b| b.cmp(a));
     v[..n].to_vec()
@@ -242,13 +244,14 @@ pub fn brackets_are_balanced(string: &str) -> bool {
 }
 
 
-fn run_test_luhn_algorithm(){
+pub fn run_test_luhn_algorithm(){
   println!("{}", is_valid_luhn_algorithm("4539319503436467"));
   println!("{}", is_valid_luhn_algorithm("055 444 285"));
   println!("{}", is_valid_luhn_algorithm("059"));
   println!("{}", is_valid_luhn_algorithm("091"));
 
 }
+
 pub fn collatz(n: u64) -> Option<u64> {
   let mut count = 0;
   let mut exp = n;
@@ -406,6 +409,26 @@ impl Allergies {
   }
 }
 
+pub fn find_binary_search(array: &[i32], key: i32) -> Option<usize> {
+  let mut lind = 0;
+  let mut hind = array.len();
+
+  while lind < hind {
+    let half = (lind + hind) / 2;
+    let current = array[half];
+
+    match current.cmp(&key) {
+      std::cmp::Ordering::Equal => return Some(half),
+      std::cmp::Ordering::Less => lind = half + 1,
+      std::cmp::Ordering::Greater => hind = half,
+    }
+  }
+
+  None
+}
+
+
+
 fn main() {
   // run_test_luhn_algorithm();
   // println!("{}", square_of_sum(100));
@@ -418,6 +441,7 @@ fn main() {
   // println!("{}", brackets_are_balanced("{}["));
   // println!("{}", collatz(1_000_000).unwrap());
   // println!("{:?}", series("777777", 3));
-  println!("{}", abbreviate("Something - I made up from thin air"));
+  // println!("{}", abbreviate("Something - I made up from thin air"));
+  println!("{:?}", find_binary_search(&[1, 3, 4, 6, 8, 9, 11], 0));
 }
 
