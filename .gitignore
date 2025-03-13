@@ -102,6 +102,8 @@ build/
 .gradle/
 build/
 
+.cache/
+
 # Android
 *.apk
 *.ap_
@@ -126,3 +128,5 @@ local.properties
 
 *.bkp
 *.dtmp
+
+CMakePresets.json
