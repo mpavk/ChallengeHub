@@ -29,20 +29,25 @@ public:
 
     // 26. Remove Duplicates from Sorted Array
     int removeDuplicates(vector<int>& nums) {
-        int count = 0;
-        for(int i = 0; i < nums.size()-1; i++) {
-            if((nums[i] == nums[i+1]) && (nums[i] != 101)) {
-                nums[i] = 101;
-                count++;
+
+        if (nums.empty()){
+            return 0;
+        }
+        int unique_index = 1;
+        for(int i = 1; i < nums.size(); i++) {
+            if((nums[i] != nums[i-1])) {
+                nums[unique_index] = nums[i];
+                unique_index++;
             }
         }
-        std::sort(nums.begin(), nums.end());
-        return nums.size() - count;
+        return unique_index;
+
     }
 
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
+   
     return 0;
 }
