@@ -32,6 +32,23 @@ impl Solution {
 
         max
     }
+    
+    // 26. Remove Duplicates from Sorted Array
+    pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
+        if nums.is_empty() {
+            return 0;
+        }
+
+        let mut unique_index = 1;
+
+        for i in 1..nums.len() {
+            if nums[i] != nums[i - 1] {
+                nums[unique_index] = nums[i];
+                unique_index += 1;
+            }
+        }
+        unique_index as i32
+    }
 }
 fn main() {
     Solution::maximum_value(vec!["gtrfds".to_string()]);
