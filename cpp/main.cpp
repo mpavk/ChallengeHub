@@ -44,10 +44,35 @@ public:
         return unique_index;
     }
 
+
+    //121. Best Time to Buy and Sell Stock
+    int maxProfit(vector<int>& prices) {
+        int max_sum = 0;
+        int max = prices[0];
+        int min = prices[0];
+
+        for(int i = 0; i < prices.size(); i++){
+            if (prices[i] > max) {
+                max = prices[i];
+            }
+
+            if (prices[i] < min || (i == prices.size() - 1)) {
+                if (max_sum < max - min) {
+                    max_sum = max - min;
+                }
+                max = prices[i];
+                min = prices[i];
+            }
+        }
+        return max_sum;
+    }
+
+
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
-
+    std::vector<int> nums = {7,1,5,3,6,4};
+    std::cout<<s.maxProfit(nums)<<std::endl;
     return 0;
 }

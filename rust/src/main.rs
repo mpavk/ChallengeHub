@@ -32,7 +32,7 @@ impl Solution {
 
         max
     }
-    
+
     // 26. Remove Duplicates from Sorted Array
     pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
         if nums.is_empty() {
