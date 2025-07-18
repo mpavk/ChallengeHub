@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 
@@ -67,6 +68,25 @@ public:
         return max_sum;
     }
 
+    //217. Contains Duplicate
+    bool containsDuplicate(vector<int>& nums) {
+        std::map<int, int> mp;
+        for(int i = 0; i < nums.size(); i++) {
+            mp[nums[i]]++;
+            if(mp[nums[i]] > 1) return true;
+        }
+        return false;
+    }
+
+    bool containsDuplicate1(std::vector<int>& nums) {
+           std::sort(nums.begin(), nums.end());
+           for (int i = 0; i < nums.size() - 1; ++i) {
+               if (nums[i] == nums[i + 1]) {
+                   return true;
+               }
+           }
+           return false;
+       }
 
 };
 
