@@ -88,11 +88,25 @@ public:
         return false;
     }
 
+    //283. Move Zeroes
+    void moveZeroes(vector<int>& nums) {
+        int insertPos = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] != 0) {
+                nums[insertPos] = nums[i];
+                insertPos++;
+            }
+        }
+
+        for (int i = insertPos; i < nums.size(); i++) {
+            nums[i] = 0;
+        }
+    }
+
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
-    std::vector<int> nums = {7,1,5,3,6,4};
-    std::cout<<s.maxProfit(nums)<<std::endl;
+    std::vector<int> nums = {1,0};
     return 0;
 }
