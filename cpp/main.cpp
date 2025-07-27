@@ -105,22 +105,43 @@ public:
     //15. 3Sum
     vector<vector<int>> threeSum(vector<int>& nums) {
         vector<vector<int>> result;
+        int n = nums.size();
+        if (n < 3) {
+            return result;
+        }
+
         sort(nums.begin(), nums.end());
-        for(int i = 0; i < nums.size() - 2; i++){
-            if(i > 0 && nums[i] == nums[i-1]) continue;
-            int left_j = i+1, right_k = nums.size() - 1;
-            while(left_j < right_k){
-                int sum = nums[i] + nums[left_j] + nums[right_k];
-                if (sum == 0){
-                    result.push_back({nums[i], nums[left_j], nums[right_k]});
-                    while(left_j < right_k && nums[left_j] == nums[left_j + 1]) left_j++;
-                    while(left_j < right_k && nums[right_k] == nums[right_k - 1]) right_k--;
-                    left_j++;
-                    right_k--;
+
+        for (int i = 0; i < n - 2; ++i) {
+            if (nums[i] > 0) {
+                break;
+            }
+            // Уникаємо дублікатів для першого елемента
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            int left = i + 1;
+            int right = n - 1;
+
+            while (left < right) {
+                long long sum = (long long)nums[i] + nums[left] + nums[right]; // Використовуємо long long
+
+                if (sum == 0) {
+                    result.emplace_back(vector<int>{nums[i], nums[left], nums[right]});
+                    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+
+                    while (left < right && nums[right] == nums[right - 1]) {
+                        right--;
+                    }
+                    left++;
+                    right--;
                 } else if (sum < 0) {
-                    left_j++;
+                    left++;
                 } else {
-                    right_k--;
+                    right--;
                 }
             }
         }
