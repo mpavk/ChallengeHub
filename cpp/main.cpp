@@ -66,7 +66,6 @@ public:
             }
         }
         return max_sum;
-    }
 
     //217. Contains Duplicate
     bool containsDuplicate(vector<int>& nums) {
@@ -101,6 +100,31 @@ public:
         for (int i = insertPos; i < nums.size(); i++) {
             nums[i] = 0;
         }
+    }
+
+    //15. 3Sum
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> result;
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i < nums.size() - 2; i++){
+            if(i > 0 && nums[i] == nums[i-1]) continue;
+            int left_j = i+1, right_k = nums.size() - 1;
+            while(left_j < right_k){
+                int sum = nums[i] + nums[left_j] + nums[right_k];
+                if (sum == 0){
+                    result.push_back({nums[i], nums[left_j], nums[right_k]});
+                    while(left_j < right_k && nums[left_j] == nums[left_j + 1]) left_j++;
+                    while(left_j < right_k && nums[right_k] == nums[right_k - 1]) right_k--;
+                    left_j++;
+                    right_k--;
+                } else if (sum < 0) {
+                    left_j++;
+                } else {
+                    right_k--;
+                }
+            }
+        }
+        return result;
     }
 
 };
