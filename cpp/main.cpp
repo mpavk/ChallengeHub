@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <type_traits>
 #include <vector>
 #include <algorithm>
 #include <map>
@@ -171,6 +172,54 @@ public:
 
         return result;
     }
+
+    //238. Product of Array Except Self
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int sum = nums[0];
+        int zero_mark = 0;
+
+        for (int i = 1; i < nums.size(); i++) {
+            if(sum == 0 && zero_mark == 0 ) {
+                sum = nums[i];
+                zero_mark++;
+                continue;
+            }
+
+            if(nums[i] != 0) {
+                sum *= nums[i];
+            } else {
+                zero_mark++;
+            }
+        }
+
+        for(int i = 0; i < nums.size(); i++) {
+            if(zero_mark == 0) {
+                nums[i] = sum / nums[i];
+            } else if(zero_mark == 1  && nums[i] == 0) {
+                nums[i] = sum;
+            } else {
+                nums[i] = 0;
+            }
+        }
+
+        return nums;
+    }
+    
+    //238. Product of Array Except Self
+    std::vector<int> productExceptSelf2(std::vector<int>& nums) {
+        int n = nums.size();
+        std::vector<int> result(n, 1);
+        int prefix_product = 1;
+        for (int i = 0; i < n; i++) {
+            result[i] = prefix_product;
+            prefix_product *= nums[i];
+        }
+        int postfix_product = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] *= postfix_product;
+            postfix_product *= nums[i];
+        }
+
 };
 
 void printVectorPairs(std::vector<std::vector<int>> &intervals){
