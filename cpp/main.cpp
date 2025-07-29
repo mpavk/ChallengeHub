@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <type_traits>
 #include <vector>
 #include <algorithm>
 #include <map>
@@ -204,9 +203,9 @@ public:
 
         return nums;
     }
-    
+
     //238. Product of Array Except Self
-    std::vector<int> productExceptSelf2(std::vector<int>& nums) {
+    vector<int> productExceptSelf2(std::vector<int>& nums) {
         int n = nums.size();
         std::vector<int> result(n, 1);
         int prefix_product = 1;
@@ -219,6 +218,8 @@ public:
             result[i] *= postfix_product;
             postfix_product *= nums[i];
         }
+        return nums;
+    }
 
 };
 
