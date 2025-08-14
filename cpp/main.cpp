@@ -218,9 +218,30 @@ public:
             result[i] *= postfix_product;
             postfix_product *= nums[i];
         }
-        return nums;
+        return result;
     }
 
+    bool checkRecord(string s) {
+        int absent = 0;
+        int late = 0;
+        for(auto ch: s){
+            if(ch == 'A'){
+                late = 0;
+                absent++;
+                if(absent > 2) {
+                    return false;
+                }
+           } else if (ch == 'L') {
+               late++;
+               if(late > 2){
+                   return false;
+               }
+           } else {
+               late = 0;
+           }
+        }
+        return true;
+    }
 };
 
 void printVectorPairs(std::vector<std::vector<int>> &intervals){
