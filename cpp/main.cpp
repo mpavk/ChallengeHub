@@ -243,6 +243,42 @@ public:
         }
         return true;
     }
+
+    std::vector<int> productQueries(int n, std::vector<std::vector<int>>& queries) {
+        const int MOD = 1e9 + 7;
+        std::vector<int> powers;
+        for (int i = 0; i < 31; ++i) {
+            if ((n >> i) & 1) {
+                powers.push_back(1 << i);
+            }
+        }
+        std::vector<int> answers;
+        for (const auto& query : queries) {
+            int left = query[0];
+            int right = query[1];
+            long long product = 1;
+            for (int j = left; j <= right; ++j) {
+                product = (product * powers[j]) % MOD;
+            }
+            answers.push_back(static_cast<int>(product));
+        }
+
+        return answers;
+    }
+
+    //2839. Check if Strings Can be Made Equal With Operations I
+    bool canBeEqual(string s1, string s2) {
+        if (s1 == s2) return true;
+        for(int i = 0, j = 2; i < s1.size() && j < s1.size(); i++, j++) {
+            char temp = s1[i];
+            if (s1[i]!=s2[i]){
+                s1[i] = s1[j];
+                s1[j] = temp;
+            }
+            if (s1 == s2) return true;
+        }
+        return false;
+    }
 };
 
 void printVectorPairs(std::vector<std::vector<int>> &intervals){
