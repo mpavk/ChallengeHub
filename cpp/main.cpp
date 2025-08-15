@@ -221,9 +221,10 @@ public:
         return result;
     }
 
+    //551. Student Attendance Record I
+
     bool checkRecord(string s) {
-        int absent = 0;
-        int late = 0;
+        int absent = 0, late = 0;
         for(auto ch: s){
             if(ch == 'A'){
                 late = 0;
