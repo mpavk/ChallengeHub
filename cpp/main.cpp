@@ -294,6 +294,8 @@ public:
         return false;
     }
 
+    // 3101. Count Alternating Subarrays
+
     long long countAlternatingSubarrays(std::vector<int>& nums) {
         if (nums.empty()) {
             return 0;
