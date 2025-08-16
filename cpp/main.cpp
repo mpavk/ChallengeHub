@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -5,6 +6,19 @@
 #include <map>
 
 using namespace std;
+
+void printVectorPairs(std::vector<std::vector<int>> &intervals){
+    for(auto &interval: intervals) {
+        std::cout<<interval[0] << " " << interval[1] << std::endl;
+    }
+}
+
+void printVector(std::vector<int> &arr){
+    for(auto &num: arr) {
+        std::cout<<num << " ";
+    }
+    std::cout<<std::endl;
+}
 
 class Solution {
 public:
@@ -279,23 +293,35 @@ public:
         }
         return false;
     }
-};
 
-void printVectorPairs(std::vector<std::vector<int>> &intervals){
-    for(auto &interval: intervals) {
-        std::cout<<interval[0] << " " << interval[1] << std::endl;
+    long long countAlternatingSubarrays(std::vector<int>& nums) {
+        if (nums.empty()) {
+            return 0;
+        }
+        long long total_count = 0;
+        int current_streak = 0;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (i == 0 || nums[i] != nums[i - 1]) {
+                current_streak++;
+            } else {
+                current_streak = 1;
+            }
+            total_count += current_streak;
+        }
+        return total_count;
     }
-}
+};
 
 int main(int argc, char *argv[]) {
     Solution s;
-    std::vector<int> nums = {1,0};
+    std::vector<int> nums = {0,1,1,1};
     std::vector<std::vector<int>> intervals = {{1,3},{2,6},{8,10},{15,18}};
     std::cout << intervals.size() << std::endl;
 
     // printVectorPairs(intervals);
     // sort(intervals.begin(), intervals.end());
     // printVectorPairs(intervals);
-    s.merge(intervals);
+    //s.merge(intervals);
+    std::cout << s.countAlternatingSubarrays(nums) << std::endl;
     return 0;
 }
