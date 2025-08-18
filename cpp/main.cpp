@@ -1,4 +1,5 @@
 #include <cmath>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -311,17 +312,25 @@ public:
         }
         return total_count;
     }
+
+    bool isPalindrome(int x) {
+        int reversed = 0;
+        int temp_number = abs(x);
+
+        if (x < 0) return false;
+
+        while (temp_number != 0) {
+            reversed = (reversed * 10) + (temp_number % 10);
+            temp_number /= 10;
+        }
+        return (reversed == abs(x));
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
     std::vector<int> nums = {0,1,1,1};
     std::vector<std::vector<int>> intervals = {{1,3},{2,6},{8,10},{15,18}};
-    std::cout << intervals.size() << std::endl;
-    // printVectorPairs(intervals);
-    // sort(intervals.begin(), intervals.end());
-    // printVectorPairs(intervals);
-    //s.merge(intervals);
-    std::cout << s.countAlternatingSubarrays(nums) << std::endl;
+    std::cout<< s.isPalindrome(121) << std::endl;
     return 0;
 }
