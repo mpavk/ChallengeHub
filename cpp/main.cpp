@@ -314,8 +314,8 @@ public:
     }
 
     bool isPalindrome(int x) {
-        int reversed = 0;
-        int temp_number = abs(x);
+        long int reversed = 0;
+        int temp_number = x;
 
         if (x < 0) return false;
 
@@ -323,7 +323,7 @@ public:
             reversed = (reversed * 10) + (temp_number % 10);
             temp_number /= 10;
         }
-        return (reversed == abs(x));
+        return (reversed == x);
     }
 };
 
