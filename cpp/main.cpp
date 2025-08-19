@@ -325,12 +325,38 @@ public:
         }
         return (reversed == x);
     }
+
+    int removeElement(vector<int>& nums, int val) {
+        int count = nums.size() - 1;
+        if (count == -1 ) {
+            return 0;
+        } else if (count == 0 && nums[0] != val ){
+            return 1;
+        }
+
+        int i = 0;
+        while(i != (count + 1)){
+            if(nums[i] == val){
+                if(nums[count] != val){
+                    swap(nums[i], nums[count]);
+                } else {
+                    count--;
+                }
+            } else {
+                i++;
+            }
+        }
+
+        return count;
+    }
+
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
-    std::vector<int> nums = {0,1,1,1};
+    std::vector<int> nums = {3,3};
     std::vector<std::vector<int>> intervals = {{1,3},{2,6},{8,10},{15,18}};
-    std::cout<< s.isPalindrome(121) << std::endl;
+    std::cout<< s.removeElement(nums, 5) << std::endl;
+    printVector(nums);
     return 0;
 }
