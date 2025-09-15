@@ -132,3 +132,6 @@ local.properties
 CMakePresets.json
 
 ./cache/
+./.zed/
+.zed/
+
