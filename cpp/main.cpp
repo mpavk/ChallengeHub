@@ -375,6 +375,20 @@ public:
         }
         return left;
     }
+
+    int lengthOfLastWord(string s) {
+        int length = 0;
+        for(int i = s.length() - 1 ; i >= 0; i--){
+            if(s[i]== ' ' && length == 0){
+                continue;
+            } else if (s[i] == ' ' && length != 0){
+                return length;
+            } else{
+                length++;
+            }
+        }
+        return length;
+    }
 };
 
 int main(int argc, char *argv[]) {
@@ -382,5 +396,6 @@ int main(int argc, char *argv[]) {
     std::vector<int> nums = {3,3};
     std::vector<std::vector<int>> intervals = {{1,3},{2,6},{8,10},{15,18}};
     printVector(nums);
+    std::cout<< s.lengthOfLastWord("Hello World"s);
     return 0;
 }
