@@ -389,6 +389,10 @@ public:
         }
         return length;
     }
+
+    bool repeatedSubstringPattern(string s) {
+
+    }
 };
 
 int main(int argc, char *argv[]) {
