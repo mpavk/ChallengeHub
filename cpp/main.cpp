@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <unordered_set>
 #include <vector>
 #include <algorithm>
 #include <map>
@@ -428,6 +429,23 @@ public:
         }
         return fibCurrent;
     }
+
+    bool isHappy(int n) {
+        std::unordered_set<int> seenNumbers;
+
+        while (n != 1 && seenNumbers.find(n) == seenNumbers.end()) {
+            seenNumbers.insert(n);
+            int sumOfSquares = 0;
+            int currentNumber = n;
+            while (currentNumber > 0) {
+                int digit = currentNumber % 10;
+                sumOfSquares += digit * digit;
+                currentNumber /= 10;
+            }
+            n = sumOfSquares;
+        }
+        return n == 1;
+    }
 };
 
 int main(int argc, char *argv[]) {
@@ -435,6 +453,6 @@ int main(int argc, char *argv[]) {
     string str = "Hello World";
     std::vector<int> nums = {3,3};
     std::vector<std::vector<int>> intervals = {{1,3},{2,6},{8,10},{15,18}};
-    std::cout <<s.repeatedSubstringPattern("abac"s) <<std::endl;
+    std::cout <<s.isHappy(2) <<std::endl;
     return 0;
 }
