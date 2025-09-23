@@ -397,6 +397,20 @@ public:
         std::string t = s + s;
         return t.find(s, 1) != s.length();
     }
+    
+    int climbStairs(int n) {
+       if (n == 0 || n == 1) {
+           return 1;
+       }
+       int prev = 1;
+       int curr = 1;
+       for (int i = 2; i <= n; i++) {
+           int next = prev + curr;
+           prev = curr;
+           curr = next;
+       }
+       return curr;
+    }
 };
 
 int main(int argc, char *argv[]) {
