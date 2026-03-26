@@ -432,7 +432,6 @@ public:
 
     bool isHappy(int n) {
         std::unordered_set<int> seenNumbers;
-
         while (n != 1 && seenNumbers.find(n) == seenNumbers.end()) {
             seenNumbers.insert(n);
             int sumOfSquares = 0;
@@ -446,6 +445,33 @@ public:
         }
         return n == 1;
     }
+
+    bool isUgly(int n){
+        int i = 2;
+        if (n<=0) {
+            return false;
+        }
+        while(n != 1 && n != -1 ){
+            if(n % i == 0){
+                if(i>5){
+                    if( i == n ) {
+                        return false;
+                    }
+                    for(int j = 2; j <= sqrt(i);j++){
+                       if (i%j == 0){
+                           continue;
+                       } else {
+                           return false;
+                       }
+                   }
+                }
+                n = n/i;
+                i = 1;
+            }
+            i++;
+       }
+        return true;
+    }
 };
 
 int main(int argc, char *argv[]) {
@@ -453,6 +479,8 @@ int main(int argc, char *argv[]) {
     string str = "Hello World";
     std::vector<int> nums = {3,3};
     std::vector<std::vector<int>> intervals = {{1,3},{2,6},{8,10},{15,18}};
-    std::cout <<s.isHappy(2) <<std::endl;
+    // std::cout <<s.isUgly(6) << std::endl;
+    std::cout <<s.isUgly(1369479539) << std::endl;
+
     return 0;
 }
