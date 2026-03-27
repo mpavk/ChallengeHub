@@ -472,15 +472,80 @@ public:
        }
         return true;
     }
+
+    int formula(vector<vector<int>> arr, int i, int j){
+        int sum = (arr[i][j-1] + arr[i][j] + arr[i][j-1]) + arr[i+1][j] + (arr[i+2][j-1] + arr[i+2][j] + arr[i+2][j-1]);
+        return sum;
+    }
+
+    int hourglassSum(vector<vector<int>> arr) {
+        int max_sum;
+        for (int i = 0; i < arr.size()-1; i++) {
+            for(int j = 0; j < arr[i].size()-1; j++){
+                if (j-1>= 0 && j<=arr[i].size()){
+                    if (i+2 < arr[i].size()) {
+                        int sum = (arr[i][j-1] + arr[i][j] + arr[i][j+1]) + arr[i+1][j] + (arr[i+2][j-1] + arr[i+2][j] + arr[i+2][j+1]);
+                        if (sum > max_sum) {
+                            max_sum = sum;
+                        }
+                        sum = 0;
+                    }
+                }
+            }
+        }
+        return max_sum;
+    }
+
+    vector<int> dynamicArray1(int n, vector<vector<int>> queries) {
+        std::vector<vector<int>> arr(n);
+        std::vector<int> result;
+        int idx = 0;
+        int lastAnswer = 0;
+
+        for(int i = 0; i<queries.size(); i++){
+            int x = queries[i][1];
+            int y = queries[i][2];
+            int idx = 0;
+            if(queries[i][0]== 1){
+                idx = (x ^ lastAnswer) % n;
+                arr[idx].push_back(y);
+            } else if (queries[i][0]== 2){
+                idx = (x ^ y) % n;
+                int element_idx = y % arr[idx].size();
+                lastAnswer = arr[idx][element_idx];
+                result.push_back(lastAnswer);
+            }
+        }
+        return result;
+    }
+    
+    vector<int> dynamicArray(int n, vector<vector<int>> queries) {
+        std::vector<std::vector<int>> arr(n); // N порожніх векторів
+        std::vector<int> result;
+        int lastAnswer = 0;
+    
+        for (int i = 0; i < queries.size(); i++) {
+            int type = queries[i][0];
+            int x = queries[i][1];
+            int y = queries[i][2];
+            
+            int idx = (x ^ lastAnswer) % n;
+    
+            if (type == 1) {
+                arr[idx].push_back(y);
+            } 
+            else if (type == 2) {
+                int element_idx = y % arr[idx].size();
+                lastAnswer = arr[idx][element_idx];
+                result.push_back(lastAnswer);
+            }
+        }
+        return result;
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
-    string str = "Hello World";
-    std::vector<int> nums = {3,3};
-    std::vector<std::vector<int>> intervals = {{1,3},{2,6},{8,10},{15,18}};
-    // std::cout <<s.isUgly(6) << std::endl;
-    std::cout <<s.isUgly(1369479539) << std::endl;
 
     return 0;
 }
