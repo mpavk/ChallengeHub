@@ -496,44 +496,34 @@ public:
         return max_sum;
     }
 
-    vector<int> dynamicArray1(int n, vector<vector<int>> queries) {
-        std::vector<vector<int>> arr(n);
-        std::vector<int> result;
-        int idx = 0;
-        int lastAnswer = 0;
-
-        for(int i = 0; i<queries.size(); i++){
-            int x = queries[i][1];
-            int y = queries[i][2];
-            int idx = 0;
-            if(queries[i][0]== 1){
-                idx = (x ^ lastAnswer) % n;
-                arr[idx].push_back(y);
-            } else if (queries[i][0]== 2){
-                idx = (x ^ y) % n;
-                int element_idx = y % arr[idx].size();
-                lastAnswer = arr[idx][element_idx];
-                result.push_back(lastAnswer);
+    vector<int> rotateLeft(int d, vector<int> arr) {
+        std::vector<int> result(arr.size());
+        for(int i = arr.size()-1; i >= 0;i--) {
+            if (i - d < 0) {
+                int f = (arr.size()) - (d-i);
+                result[f] = arr[i];
+            } else {
+                result[i-d] = arr[i];
             }
         }
         return result;
     }
-    
+
     vector<int> dynamicArray(int n, vector<vector<int>> queries) {
         std::vector<std::vector<int>> arr(n); // N порожніх векторів
         std::vector<int> result;
         int lastAnswer = 0;
-    
+
         for (int i = 0; i < queries.size(); i++) {
             int type = queries[i][0];
             int x = queries[i][1];
             int y = queries[i][2];
-            
+
             int idx = (x ^ lastAnswer) % n;
-    
+
             if (type == 1) {
                 arr[idx].push_back(y);
-            } 
+            }
             else if (type == 2) {
                 int element_idx = y % arr[idx].size();
                 lastAnswer = arr[idx][element_idx];
@@ -546,6 +536,8 @@ public:
 
 int main(int argc, char *argv[]) {
     Solution s;
-
+    std::vector<int> arr {1, 2, 3, 4, 5};
+    std::cout<< arr.size();
+    s.rotateLeft(4,arr);
     return 0;
 }
