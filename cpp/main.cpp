@@ -551,16 +551,35 @@ public:
         }
         return st.empty();
     }
+
+    vector<int> plusOne(vector<int>& digits) {
+        for(int i = digits.size()-1; i >= 0; i--){
+            if (digits[i] == 9 ){
+                digits[i] = 0;
+            } else {
+                digits[i] = digits[i] + 1;
+                return digits;
+            }
+        }
+        digits.push_back(0);
+        digits[0] = 1;
+        return digits;
+    }
+
+
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
     std::stack<char> st;
+
+    std::vector<int> v = {1, 2 ,3};
+    std::cout<<v.size()<<std::endl;
     // std::cout<<!st.empty()<<std::endl;
-    std::vector<int> arr {1, 2, 3, 4, 5};
-    std::string str1 = "(}";
-    std::cout << s.isValid(str1) << std::endl;
-    std::cout<< arr.size();
-    s.rotateLeft(4,arr);
+    // std::vector<int> arr {1, 2, 3, 4, 5};
+    // std::string str1 = "(}";
+    // std::cout << s.isValid(str1) << std::endl;
+    // std::cout<< arr.size();
+    // s.rotateLeft(4,arr);
     return 0;
 }
