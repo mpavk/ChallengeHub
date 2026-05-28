@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <stack>
 
 using namespace std;
 
@@ -532,11 +533,33 @@ public:
         }
         return result;
     }
+
+    bool isValid(string s) {
+        std::stack<char> st;
+        for(auto ch: s){
+            if (ch == '{' || ch == '[' || ch == '(') {
+                st.push(ch);
+            } else if (ch == ')' || ch == ']' || ch == '}') {
+                if(st.empty()) return false;
+
+                if( (ch == ')'  && st.top() == '(') || (ch == ']'  && st.top() == '[') || (ch == '}'  && st.top() == '{')) {
+                    st.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+        return st.empty();
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
+    std::stack<char> st;
+    // std::cout<<!st.empty()<<std::endl;
     std::vector<int> arr {1, 2, 3, 4, 5};
+    std::string str1 = "(}";
+    std::cout << s.isValid(str1) << std::endl;
     std::cout<< arr.size();
     s.rotateLeft(4,arr);
     return 0;
