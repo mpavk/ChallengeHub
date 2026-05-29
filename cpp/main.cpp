@@ -2,11 +2,13 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 #include <algorithm>
 #include <map>
 #include <stack>
+#include <string_view>
 
 using namespace std;
 
@@ -566,20 +568,45 @@ public:
         return digits;
     }
 
+    bool wordPattern(string pattern, string s) {
+        std::unordered_map<string_view, char> kv;
+        std::unordered_set<char> char_keys;
 
+        std::string_view sv(s);
+        int start = 0;
+        int p_idx = 0;
+        string temp_str;
+        while(start < sv.length()) {
+            if(p_idx >= pattern.length()) return false;
+
+            size_t end = sv.find(' ', start);
+            if(end == std::string_view::npos){
+                end = sv.length();
+            }
+
+            std::string_view word = sv.substr(start, end - start);
+            char current_char = pattern[p_idx];
+
+            auto it = kv.find(word);
+            if (it != kv.end()){
+                if (it->second != current_char) {
+                    return false;
+                }
+            } else {
+                if (char_keys.contains(current_char)) {
+                    return false;
+                }
+               kv[word] = current_char;
+               char_keys.insert(current_char);
+            }
+            start = end + 1;
+            p_idx++;
+        }
+        return p_idx == pattern.length();
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
-    std::stack<char> st;
-
-    std::vector<int> v = {1, 2 ,3};
-    std::cout<<v.size()<<std::endl;
-    // std::cout<<!st.empty()<<std::endl;
-    // std::vector<int> arr {1, 2, 3, 4, 5};
-    // std::string str1 = "(}";
-    // std::cout << s.isValid(str1) << std::endl;
-    // std::cout<< arr.size();
-    // s.rotateLeft(4,arr);
     return 0;
 }
