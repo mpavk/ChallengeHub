@@ -604,9 +604,21 @@ public:
         }
         return p_idx == pattern.length();
     }
+
+    int singleNumber(vector<int>& nums) {
+
+    }
+
+    int thirdMax(vector<int>& nums) {
+
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
+    std::stack<char> st;
+
+    std::vector<int> v = {1, 2 ,3};
+
     return 0;
 }
