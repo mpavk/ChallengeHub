@@ -606,7 +606,12 @@ public:
     }
 
     int singleNumber(vector<int>& nums) {
+        int temp  = 0;
+        for(int num : nums ){
+            temp ^= num;
+        }
 
+        return temp;
     }
 
     int thirdMax(vector<int>& nums) {
@@ -618,7 +623,27 @@ int main(int argc, char *argv[]) {
     Solution s;
     std::stack<char> st;
 
-    std::vector<int> v = {1, 2 ,3};
+    std::vector<int> v = {1, 4, 2, 1, 2};
 
+    int temp  = 0;
+    for(int num : v ){
+        temp ^= num;
+        std::cout << temp << " ";
+    }
+
+    // std::vector<int> v = {1, 2 ,3};
+    // string str1 = "abba";
+    // string str2 = "dog cat cat dog";
+    // string temp;
+    // temp = str2.substr(0, 3);
+    // std::cout <<temp << std::endl;
+    // std::cout <<s.wordPattern(str1, str2) << std::endl;
+    // std::cout<<v.size()<<std::endl;
+    // std::cout<<!st.empty()<<std::endl;
+    // std::vector<int> arr {1, 2, 3, 4, 5};
+    // std::string str1 = "(}";
+    // std::cout << s.isValid(str1) << std::endl;
+    // std::cout<< arr.size();
+    // s.rotateLeft(4,arr);
     return 0;
 }
