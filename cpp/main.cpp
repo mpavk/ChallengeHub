@@ -633,8 +633,18 @@ public:
         }
         return -1;
     }
+
+    void reverseString(vector<char>& s) {
+        int j = s.size() - 1;
+        for(int i = 0; i <= j; i++){
+            char temp_s = s[j];
+            s[j] = s[i];
+            s[i] = temp_s;
+            j--;
+        }
+    }
 };
 
 int main(int argc, char *argv[]) {
-    return 0;
+    Solution s;
 }
