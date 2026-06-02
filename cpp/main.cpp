@@ -643,6 +643,16 @@ public:
             j--;
         }
     }
+
+    char findTheDifference(string s, string t) {
+        char temp_s = 0;
+        char temp_t = t[t.size()-1];
+        for (int i = 0; i < s.size(); i++){
+            temp_s ^= s[i];
+            temp_s ^= t[i];
+        }
+        return temp_t^temp_s;
+    }
 };
 
 int main(int argc, char *argv[]) {
