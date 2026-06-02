@@ -653,6 +653,22 @@ public:
         }
         return temp_t^temp_s;
     }
+
+    vector<string> fizzBuzz(int n) {
+        vector<string> numbers_string;
+        for(int i = 1; i <= n; i++) {
+            if (i%3 == 0 and i%5 == 0) {
+                numbers_string.push_back("FizzBuzz");
+            } else if (i%3 == 0) {
+                numbers_string.push_back("Fizz");
+            } else if (i%5==0) {
+                numbers_string.push_back("Buzz");
+            } else {
+                numbers_string.push_back(std::to_string(i));
+            }
+        }
+        return numbers_string;
+    }
 };
 
 int main(int argc, char *argv[]) {
