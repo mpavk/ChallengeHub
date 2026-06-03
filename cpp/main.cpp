@@ -669,8 +669,20 @@ public:
         }
         return numbers_string;
     }
+
+    vector<vector<int>> generate(int numRows) {
+        std::vector<std::vector<int>> result(numRows);
+        for (int i = 0; i < numRows; i++){
+            result[i].resize(i+1, 1);
+            for (int k = 1; k < i; k++) {
+                result[i][k] = result[i - 1][k - 1] + result[i - 1][k];
+            }
+        }
+        return result;
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
+    s.generate(5);
 }
