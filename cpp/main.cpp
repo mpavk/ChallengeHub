@@ -680,9 +680,30 @@ public:
         }
         return result;
     }
+
+    bool detectCapitalUse(string word) {
+        int counter = 0;
+        for(int i = 0; i < word.size(); i++ ){
+            if (int(word[i])>= 65 && int(word[i]) <= 90){
+                counter++;
+            }
+        }
+        std::cout<<counter<<std::endl;
+        if (counter == word.size()){
+            return true;
+        } else if( counter==1 and (int(word[0])>= 65 && int(word[0]) <= 90)) {
+            return true;
+        } else if (counter == 0 && word.size() != 0) {
+            return true;
+        }
+
+        return false;
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
     s.generate(5);
+    std::cout<<s.detectCapitalUse("Usa")<<std::endl;
+    std::cout<<int('a')<<std::endl;
 }
