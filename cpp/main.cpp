@@ -699,11 +699,27 @@ public:
 
         return false;
     }
+
+    int firstUniqChar(std::string s) {
+        int charCount[256] = {0};
+
+        for(char c : s) {
+            charCount[c]++;
+        }
+
+        int n = s.size();
+        for(int i = 0; i < n; i++){
+            if (charCount[s[i]] == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
-    s.generate(5);
-    std::cout<<s.detectCapitalUse("Usa")<<std::endl;
-    std::cout<<int('a')<<std::endl;
+    // s.generate(5);
+    std::cout<<s.firstUniqChar("abba")<<std::endl;
+    // std::cout<<int('a')<<std::endl;
 }
