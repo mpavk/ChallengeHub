@@ -786,12 +786,37 @@ public:
 
         return result;
     }
+
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+        int counter = 0;
+
+        for(int i = 0; i<flowerbed.size(); i++){
+            if(flowerbed[i] == 0 ) {
+                bool left = (i == 0) || ( flowerbed[i-1] == 0);
+                bool right = (i == flowerbed.size()-1) || (flowerbed[i+1] == 0);
+
+                if (left && right) {
+                    flowerbed[i] = 1;
+                    counter++;
+                }
+
+            }
+        }
+
+        if(counter >= n) {
+            return true;
+        }
+
+        return false;
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
     // s.generate(5);
-    std::cout<<s.licenseKeyFormatting1("--a-a-a-a--", 1)<<std::endl;
-    std::cout<<1%4<<std::endl;
-    // std::cout<<int('a')<<std::endl;
+    // std::cout<<s.licenseKeyFormatting1("--a-a-a-a--", 1)<<std::endl;
+    // std::cout<<1%4<<std::endl;
+
+    vector<int> v = {1,0,0,0,0,1};
+    std::cout<<s.canPlaceFlowers(v, 2)<<std::endl;
 }
