@@ -1,3 +1,4 @@
+#include <cctype>
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
@@ -715,11 +716,55 @@ public:
         }
         return -1;
     }
+
+
+    string licenseKeyFormatting(string s, int k) {
+
+        int count = 0;
+        for(char const& c: s){
+            if(c != '-'){
+                count++;
+            }
+        }
+
+        if(s.size() == 1 && s[0] == '-'){
+            return "";
+        }
+
+        string result = "";
+
+        int full_groups = 0;
+        int balance = -1;
+        full_groups = count/k;
+        balance = count%k;
+        int group_members_counter = 0;
+        int group_counter = 1;
+        int all_groups = (balance>0) ? full_groups+1 : full_groups;
+
+        for(int i = 0; i < s.size(); i++){
+            if (s[i]!= '-'){
+                result.push_back(std::toupper(s[i]));
+                group_members_counter++;
+
+                if((balance == group_members_counter && balance != 0) || group_members_counter == k){
+                    if(i != s.size()-1 && group_counter < all_groups){
+                         result.push_back('-');
+                    }
+                     group_members_counter = 0;
+                     group_counter++;
+                     balance = -1;
+                }
+            }
+        }
+
+        return result;
+    }
 };
 
 int main(int argc, char *argv[]) {
     Solution s;
     // s.generate(5);
-    std::cout<<s.firstUniqChar("abba")<<std::endl;
+    std::cout<<s.licenseKeyFormatting1("--a-a-a-a--", 1)<<std::endl;
+    std::cout<<1%4<<std::endl;
     // std::cout<<int('a')<<std::endl;
 }
