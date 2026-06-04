@@ -717,6 +717,33 @@ public:
         return -1;
     }
 
+    string licenseKeyFormatting1(string s, int k) {
+
+        int count = 0;
+        for(char const& c: s){
+            if(c != '-'){
+                count++;
+            }
+        }
+
+        string result = "";
+
+        int counter_added_sym = 0;
+
+        for(int i = s.size()-1; i>=0; i--){
+            if (s[i]!= '-'){
+                if(counter_added_sym>0 && counter_added_sym%k==0){
+                    result.push_back('-');
+                }
+
+                result.push_back(toupper(s[i]));
+                counter_added_sym++;
+            }
+
+        }
+        reverse(result.begin(), result.end());
+        return result;
+    }
 
     string licenseKeyFormatting(string s, int k) {
 
