@@ -809,6 +809,18 @@ public:
 
         return false;
     }
+
+    int hammingDistance(int x, int y) {
+        int distance = 0;
+        unsigned int n = x ^ y;
+
+        while (n != 0) {
+            distance++;
+            n &= (n - 1);
+        }
+
+        return distance;
+    }
 };
 
 int main(int argc, char *argv[]) {
