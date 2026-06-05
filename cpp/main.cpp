@@ -821,6 +821,24 @@ public:
 
         return distance;
     }
+
+    bool checkPerfectNumber(int num) {
+       if(num<=1){
+           return false;
+       }
+       int sum = 1;
+
+       for(int i = 2; i*i <=num; i++){
+           if (num % i == 0){
+               sum+=i;
+
+               if(i != num/i){
+                   sum+=num/i;
+               }
+           }
+       }
+       return num == sum;
+    }
 };
 
 int main(int argc, char *argv[]) {
@@ -831,4 +849,5 @@ int main(int argc, char *argv[]) {
 
     vector<int> v = {1,0,0,0,0,1};
     std::cout<<s.canPlaceFlowers(v, 2)<<std::endl;
+    std::cout<<s.checkPerfectNumber(28)<<std::endl;
 }
