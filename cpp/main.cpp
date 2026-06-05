@@ -839,6 +839,45 @@ public:
        }
        return num == sum;
     }
+
+    vector<long long> distance(vector<int>& nums) {
+        int n = nums.size();
+        vector<long long> arr(n, 0);
+
+        unordered_map<int, vector<int>> indices_map;
+        for (int i = 0; i < n; i++) {
+            indices_map[nums[i]].push_back(i);
+        }
+
+        for (auto& [num, indices] : indices_map) {
+            long long total_sum = 0;
+            for (int idx : indices) {
+                total_sum += idx;
+            }
+
+            long long left_sum = 0;
+            long long right_sum = total_sum;
+
+            for (int i = 0; i < indices.size(); i++) {
+                long long current_idx = indices[i];
+
+                right_sum -= current_idx;
+
+                long long left_count = i;
+                long long right_count = indices.size() - 1 - i;
+
+                long long left_distance = (left_count * current_idx) - left_sum;
+                long long right_distance = right_sum - (right_count * current_idx);
+
+                arr[current_idx] = left_distance + right_distance;
+
+                left_sum += current_idx;
+            }
+        }
+
+        return arr;
+    }
+
 };
 
 int main(int argc, char *argv[]) {
