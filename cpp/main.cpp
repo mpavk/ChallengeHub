@@ -878,6 +878,22 @@ public:
         return arr;
     }
 
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> dict_num;
+
+        for(int i = 0; i < nums.size(); i++){
+            if (!dict_num.contains(nums[i])){
+                dict_num[nums[i]] = i;
+            }
+        }
+
+        for (int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i];
+            if (dict_num.contains(complement)) {
+                return {dict_num[nums[i]], complement};
+            }
+        }
+    }
 };
 
 int main(int argc, char *argv[]) {
