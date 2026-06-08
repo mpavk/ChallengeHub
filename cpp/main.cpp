@@ -882,17 +882,16 @@ public:
         unordered_map<int, int> dict_num;
 
         for(int i = 0; i < nums.size(); i++){
+            int complement = target - nums[i];
             if (!dict_num.contains(nums[i])){
                 dict_num[nums[i]] = i;
             }
-        }
-
-        for (int i = 0; i < nums.size(); i++) {
-            int complement = target - nums[i];
-            if (dict_num.contains(complement)) {
-                return {dict_num[nums[i]], complement};
+            if (dict_num.contains(complement) and dict_num[complement] != i) {
+                return {dict_num[complement], i};
             }
         }
+
+        return {};
     }
 };
 
@@ -902,7 +901,9 @@ int main(int argc, char *argv[]) {
     // std::cout<<s.licenseKeyFormatting1("--a-a-a-a--", 1)<<std::endl;
     // std::cout<<1%4<<std::endl;
 
-    vector<int> v = {1,0,0,0,0,1};
-    std::cout<<s.canPlaceFlowers(v, 2)<<std::endl;
-    std::cout<<s.checkPerfectNumber(28)<<std::endl;
+    vector<int> v = {3,2,4};
+    s.twoSum(v, 6);
+    // std::cout<<s.twoSum(v, 6)<<std::endl;
+    // std::cout<<s.canPlaceFlowers(v, 2)<<std::endl;
+    // std::cout<<s.checkPerfectNumber(28)<<std::endl;
 }
