@@ -881,16 +881,13 @@ public:
     vector<int> twoSum(vector<int>& nums, int target) {
         unordered_map<int, int> dict_num;
 
-        for(int i = 0; i < nums.size(); i++){
-            int complement = target - nums[i];
-            if (!dict_num.contains(nums[i])){
+        for (int i = 0; i < nums.size(); i++) {
+                int complement = target - nums[i];
+                if (dict_num.contains(complement)) {
+                    return {dict_num[complement], i};
+                }
                 dict_num[nums[i]] = i;
             }
-            if (dict_num.contains(complement) and dict_num[complement] != i) {
-                return {dict_num[complement], i};
-            }
-        }
-
         return {};
     }
 };
