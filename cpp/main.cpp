@@ -890,6 +890,15 @@ public:
             }
         return {};
     }
+
+    vector<string> letterCombinations(string digits) {
+        if (digits.empty()) return {};
+        const vector<string> pad = {
+            "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
+        };
+
+
+    }
 };
 
 int main(int argc, char *argv[]) {
